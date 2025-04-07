@@ -11,7 +11,9 @@ namespace CarGo.Persistence.Context
    public class CarGoContext : DbContext 
 
     {
-
+        public CarGoContext(DbContextOptions<CarGoContext> options) : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CarGodb;Username=postgres;Password=1234");
