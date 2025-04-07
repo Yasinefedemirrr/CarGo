@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarGo.WebApi", "Presentaton\CarGo.WebApi\CarGo.WebApi.csproj", "{F56209C7-8FFB-4AF9-91DA-819F141CF373}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarGo.Application", "core\CarGo.Application\CarGo.Application.csproj", "{486A0D30-F978-4B0D-8C7D-44220E856446}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F56209C7-8FFB-4AF9-91DA-819F141CF373}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F56209C7-8FFB-4AF9-91DA-819F141CF373}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F56209C7-8FFB-4AF9-91DA-819F141CF373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486A0D30-F978-4B0D-8C7D-44220E856446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486A0D30-F978-4B0D-8C7D-44220E856446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486A0D30-F978-4B0D-8C7D-44220E856446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486A0D30-F978-4B0D-8C7D-44220E856446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,5 +47,6 @@ Global
 		{11540B91-587E-4B9D-979D-3E8D71FBE429} = {4D90B29A-36D1-4BF7-85AD-B8F075AF8C37}
 		{58E992E6-CE0C-4607-9D8C-03E07AED37E9} = {2667E8FA-2611-48CA-81F5-DB855F724126}
 		{F56209C7-8FFB-4AF9-91DA-819F141CF373} = {AA3C0619-CFE6-4EB5-A8A3-BC6F25382B14}
+		{486A0D30-F978-4B0D-8C7D-44220E856446} = {4D90B29A-36D1-4BF7-85AD-B8F075AF8C37}
 	EndGlobalSection
 EndGlobal
