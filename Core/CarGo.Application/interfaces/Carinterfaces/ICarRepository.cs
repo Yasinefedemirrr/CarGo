@@ -12,5 +12,6 @@ namespace CarGo.Application.interfaces.Carinterfaces
     public interface ICarRepository
     {
         List<Car> GetCarsListWithBrand();
+        List<Car> GetLast5CarsListWithBrand();
     }
 }

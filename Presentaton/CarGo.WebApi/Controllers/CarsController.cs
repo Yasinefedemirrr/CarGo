@@ -18,8 +18,11 @@ namespace CarGo.WebApi.Controllers
         private readonly UpdateCarCommandHandler _updateCarCommandHandler;
         private readonly RemoveCarCommandHandler _removeCarCommandHandler;
         private readonly GetCarWithBrandQueryHandler _getCarsWithBrandQueryHandler;
+        private readonly GetLast5CarWithBrandQueryHandler _getLAst5CarsWithBrandQueryHandler;
 
-        public CarsController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler)
+
+
+        public CarsController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarWithBrandQueryHandler getLAst5CarsWithBrandQueryHandler)
         {
             _createCarCommandHandler = createCarCommandHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -27,6 +30,7 @@ namespace CarGo.WebApi.Controllers
             _updateCarCommandHandler = updateCarCommandHandler;
             _removeCarCommandHandler = removeCarCommandHandler;
             _getCarsWithBrandQueryHandler = getCarWithBrandQueryHandler;
+            _getLAst5CarsWithBrandQueryHandler = getLAst5CarsWithBrandQueryHandler;
         }
 
         [HttpGet]
@@ -66,6 +70,12 @@ namespace CarGo.WebApi.Controllers
         public  IActionResult GetCarWithBrand()
         {
             var values = _getCarsWithBrandQueryHandler.Handle();
+            return Ok(values);
+        }
+        [HttpGet("GetLast5CarWithBrandQueryHandler")]
+        public IActionResult GetLast5CarWithBrandQueryHandler()
+        {
+            var values = _getLAst5CarsWithBrandQueryHandler.Handle();
             return Ok(values);
         }
     }

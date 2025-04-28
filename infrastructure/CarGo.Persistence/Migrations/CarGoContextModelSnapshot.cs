@@ -47,6 +47,31 @@ namespace CarGo.Persistence.Migrations
                     b.ToTable("Abouts");
                 });
 
+            modelBuilder.Entity("Cargo.Domain.Entities.Author", b =>
+                {
+                    b.Property<int>("AuthorID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AuthorID"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("AuthorID");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("Cargo.Domain.Entities.Banner", b =>
                 {
                     b.Property<int>("BannerID")
@@ -74,6 +99,39 @@ namespace CarGo.Persistence.Migrations
                     b.HasKey("BannerID");
 
                     b.ToTable("Banners");
+                });
+
+            modelBuilder.Entity("Cargo.Domain.Entities.Blog", b =>
+                {
+                    b.Property<int>("BlogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BlogID"));
+
+                    b.Property<int>("AuthorID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CoverImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Title")
+                        .HasColumnType("integer");
+
+                    b.HasKey("BlogID");
+
+                    b.HasIndex("AuthorID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("Cargo.Domain.Entities.Brand", b =>
@@ -425,6 +483,25 @@ namespace CarGo.Persistence.Migrations
                     b.ToTable("Testimonials");
                 });
 
+            modelBuilder.Entity("Cargo.Domain.Entities.Blog", b =>
+                {
+                    b.HasOne("Cargo.Domain.Entities.Author", "Author")
+                        .WithMany("Blogs")
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cargo.Domain.Entities.Category", "Category")
+                        .WithMany("Blogs")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("Cargo.Domain.Entities.Car", b =>
                 {
                     b.HasOne("Cargo.Domain.Entities.Brand", "Brand")
@@ -481,6 +558,11 @@ namespace CarGo.Persistence.Migrations
                     b.Navigation("Carr");
                 });
 
+            modelBuilder.Entity("Cargo.Domain.Entities.Author", b =>
+                {
+                    b.Navigation("Blogs");
+                });
+
             modelBuilder.Entity("Cargo.Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Cars");
@@ -493,6 +575,11 @@ namespace CarGo.Persistence.Migrations
                     b.Navigation("CarFeatures");
 
                     b.Navigation("CarPricings");
+                });
+
+            modelBuilder.Entity("Cargo.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("Cargo.Domain.Entities.Feature", b =>
