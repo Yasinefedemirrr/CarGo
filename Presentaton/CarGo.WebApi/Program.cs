@@ -15,13 +15,28 @@ using CarGo.Persistence.Repositories.CarRepositories;
 using CarGo.Application.Features.CQRS.Handlers.CategoryHandlers;
 using CarGo.Application.Features.CQRS.Handlers.ContactHandlers;
 using CarGo.Application.Services;
+using CarGo.Application.Features.Mediator.Handlers.BlogHandlers;
+using MediatR;
+using CarGo.Application.interfaces.BlogInterfaces;
+using CarGo.Persistence.Repositories.BlogRepositories;
 
+
+
+// CORS için politika ekle
 var builder = WebApplication.CreateBuilder(args);
 
+// CORS için politika ekle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactNative", policy =>
+    {
+        policy.WithOrigins("http://localhost:19006") // React Native debug server URL'si
+              .AllowAnyHeader()                     // Baþlýklarý serbest býrak
+              .AllowAnyMethod();                    // Yöntemleri serbest býrak
+    });
+});
 
-
-
-
+builder.Services.AddControllers();
 
 
 
@@ -29,10 +44,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CarGoContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSqlConnection")));
 
-// Add services to the container.
-builder.Services.AddScoped <CarGoContext> ();
+// Diðer servisleri ekleyelim
+builder.Services.AddScoped<CarGoContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped(typeof(IBlogRepository), typeof(BlogRepository));
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
 builder.Services.AddScoped<CreateAboutCommandHandler>();
@@ -73,23 +89,24 @@ builder.Services.AddScoped<RemoveContactCommandHandler>();
 
 builder.Services.AddApplicationService(builder.Configuration);
 
-
-
-
+// API controller'larýný ve Swagger'ý ekleyelim
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// CORS'u doðru sýrada eklediðimizden emin olalým
+app.UseCors("AllowReactNative");  // CORS middleware'ini burada çaðýrýyoruz.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+
 app.UseAuthorization();
+
 app.MapControllers();
 app.Run();

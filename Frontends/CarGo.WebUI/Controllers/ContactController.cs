@@ -27,7 +27,7 @@ namespace CarGo.WebUI.Controllers
             createContactDto.SendDate = DateTime.UtcNow;
             var jsonData = JsonConvert.SerializeObject(createContactDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7266/api/Contacts", stringContent);
+            var responseMessage = await client.PostAsync("http://localhost:7266/api/Contacts", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Default");

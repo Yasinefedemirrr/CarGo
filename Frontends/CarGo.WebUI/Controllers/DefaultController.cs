@@ -20,7 +20,7 @@ namespace CarGo.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
           
-            var responseMessage = await client.GetAsync("https://localhost:7266/api/Locations");
+            var responseMessage = await client.GetAsync("http://localhost:7266/api/Locations");
 
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);

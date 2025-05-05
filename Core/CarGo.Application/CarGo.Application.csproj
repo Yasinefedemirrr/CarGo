@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Features\Mediator\Queries\BlogQueries\GetLast3BlogsWithAuthorsQuery.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Cargo.Domain\Cargo.Domain.csproj" />
   </ItemGroup>
 

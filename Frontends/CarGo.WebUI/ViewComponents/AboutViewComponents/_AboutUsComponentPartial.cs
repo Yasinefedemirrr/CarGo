@@ -15,7 +15,7 @@ namespace CarGo.WebUI.ViewComponents.AboutViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7266/api/Abouts");
+            var responseMessage = await client.GetAsync("http://localhost:7266/api/Abouts");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();

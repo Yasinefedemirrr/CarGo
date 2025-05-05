@@ -11,11 +11,11 @@ using CarGo.Application.Locations.Mediator.Queries.LocationQueries;
 
 namespace CarGo.Application.Locations.Mediator.Handlers.LocationHandlers
 {
-    public class GetLocationByIdQueryHandler : IRequestHandler<GetLocationByIdQuery, GetLocationByIdQueryResult>
+    public class GetBlogByIdQueryHandler : IRequestHandler<GetLocationByIdQuery, GetLocationByIdQueryResult>
     {
         private readonly IRepository<Location> _repository;
 
-        public GetLocationByIdQueryHandler(IRepository<Location> repository)
+        public GetBlogByIdQueryHandler(IRepository<Location> repository)
         {
             _repository = repository;
         }

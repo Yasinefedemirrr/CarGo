@@ -15,7 +15,7 @@ namespace CarGo.WebUI.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7266/api/Service");
+            var responseMessage = await client.GetAsync("http://localhost:7266/api/Service");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
